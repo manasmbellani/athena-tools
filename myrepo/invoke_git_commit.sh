@@ -19,13 +19,14 @@
 
 if [ $# -lt 1 ]; then
     echo "[-] $0 <commit_msg> 
-                 [changes_to_commit=.]
-                 [folder-to-commit-from=.]"
+                 [folder-to-commit-from=.]
+                 [changes_to_commit=.]"
+
     exit 1
 fi
 commit_msg="$1"
-changes_to_commit=${2:-"."}
-folder_to_commit_from=${3:-"."}
+folder_to_commit_from=${2:-"."}
+changes_to_commit=${3:-"."}
 
 if [ "$folder_to_commit_from" != "." ] && [ ! -d "$folder_to_commit_from" ]; then
     echo "Folder to commit from: $folder_to_commit_from does not exist."
