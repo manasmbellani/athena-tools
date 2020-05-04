@@ -1,4 +1,14 @@
-# mydevice_set_dns_server.sh
+
+# mydevice
+Scripts related to performing actions on Mac/Linux e.g. sleep operatins
+
+## invoke_device_sleep.sh
+```
+# Script identifies OS in use and puts the device to sleep in Mac Or Linux
+# 
+```
+
+## update_dns_server.sh
 ```
 # Script enables/disables DNS servers on a Macbook or Linux PC
 # 
@@ -20,3 +30,12 @@
 #         ./mydevice_set_dns_server.sh 1.1.1.1
 # 
 ```
+
+## clear_disk_space_usage.sh
+```
+#                                                                                                   
+# Script clears disk space by removing unwanted packages from Linux using apt-get                   
+#
+```
+## Misc
+* TODO: Script to clear disk usage in Linux.
