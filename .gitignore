@@ -6,3 +6,4 @@
 **/*.xml
 **/*.yml
 **/*.json
+**/.DS_Store

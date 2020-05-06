@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import argparse
 import json
 import os
@@ -21,7 +20,7 @@ DESCRIPTION = """
     python3 published under the Virustotal Github account. This script takes 
     a set of files
 
-    To install the requirements, run the following command: 
+    To install the requirements for this script, run the following command: 
         python3 -m pip install vt-py
 
     Once installed, the API key can be downloaded by registering and signing-in
@@ -75,7 +74,8 @@ def is_hash(ioc):
     else:
         False
 
-parser = argparse.ArgumentParser(description=DESCRIPTION)
+parser = argparse.ArgumentParser(description=DESCRIPTION,
+                                formatter_class=argparse.RawTextHelpFormatter)
 parser.add_argument("-ak", "--api-key", required=True,
     help="API Key to use for checking VT")
 parser.add_argument("-i", "--iocs", required=True,
@@ -146,23 +146,31 @@ for i, ioc in enumerate(iocs):
         print(json.dumps(ioc_info.last_analysis_stats, indent=4))
 
         if args['avs']:
-            print("[+] IOC: {ioc} AV detections")
+            print("[+] IOC: {ioc} AV detections".format(**args))
             print(json.dumps(ioc_info.last_analysis_results, indent=4))
 
         if args['all']:
-            print("[+] IOC: {ioc} All Info")
+            print("[+] IOC: {ioc} All Info".format(**args))
             print(json.dumps(ioc_info.to_dict(), indent=4))
 
     except Exception as e:
         args['err'] = str(e)
         args['err_class'] = str(e.__class__)
         print("[-] Error for ioc: {ioc}, err_class: {err_class}, error: {err}".format(**args))
-        
-    # Skip the wait if last IOC
-    if i < len(iocs)-1:
-        print("[*] Sleeping for {sleep_time} secs".format(**args))
-        time.sleep(sleep_time)
 
-print("[*] Closing the Virustotal client")
+    except KeyboardInterrupt:
+        print("[*] User interrupted script")
+        break
+
+    try:
+        # Skip the wait if last IOC
+        if i < len(iocs)-1:
+            print("[*] Sleeping for {sleep_time} secs".format(**args))
+            time.sleep(sleep_time)
+    except KeyboardInterrupt:
+        print("[*] User interrupted script")
+        break
+
+print("[*] Closing VT client before exiting")
 if client:
     client.close()

@@ -26,7 +26,10 @@ def main():
     args_dict = vars(args)
 
     print("[*] Checking input file: {infile} exists".format(**args_dict))
-    if os.path.isfile()
+    if not os.path.isfile(args['infile']):
+        print("[-] File not found!")
+
+
 
 if __name__ == "__main__":
     sys.exit(main())

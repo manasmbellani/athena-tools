@@ -1,6 +1,8 @@
 # forensics 
 
-## get_virustotal_iocs_info.py
+## Scripts
+
+### get_virustotal_iocs_info.py
 ```
 Script provides ability to upload IOCs for verification in Virustotal. 
     This Script depends on VirusTotal(VT) python3 library which is the original 
