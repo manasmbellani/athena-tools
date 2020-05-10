@@ -3,6 +3,12 @@
 # Script connects to HaveIBeenPwned API to download a list of all breaches for 
 # a given breach(s),and outputs them into a file
 # 
+# Requires:
+#     Apart from the standard tools pre-available in mac, Linux such as grep,
+#     tee, curl, the script also requires jq >v1.6:
+#         brew install jq
+#         sudo apt-get -y install jq
+#
 # Args:
 #     api-key: HaveIBeenPwned API key. Required.
 #     breach-names/file: File with list of breachesto check. Required.
