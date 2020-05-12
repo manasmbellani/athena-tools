@@ -5,6 +5,10 @@
 # Usage:
 #   ...<domains>... | $0 [method=ipinfo|whois]"
 # 
+# Requires and curl:
+#     sudo apt-get -y install whois curl
+#     brew cask install curl whois
+# 
 # Args:
 #     ipinfo: Method to perform IPInfo on the domain. Possible inputs: 
 #          ipinfo.io/ipinfo
