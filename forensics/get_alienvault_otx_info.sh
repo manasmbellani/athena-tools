@@ -6,6 +6,10 @@
 # Alienvault Direct Connect API and the various sections are documented here: \
 #      https://otx.alienvault.com/api
 # 
+# Please note that paging is not implemented so only the first page is currently
+# returned. Review the 'next' and the 'page' flag in response to confirm if next
+# page is present.
+# 
 # Requires:
 #     JQ, to parse the output
 # 
