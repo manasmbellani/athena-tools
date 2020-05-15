@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 # 
 # Script will get a JPG screenshot for Web IP, domain, URL using wkhtmltoimage &
-# wkhtml utility within python
-# 
+# wkhtml utility within python. 
+#
+# Note that imgkit only gets screenshots for URLs/domains that have valid 2xx,
+# 3xx responses. Otherwise, it will throw an error.
+#
 # More info available here: https://github.com/jarrekk/imgkit
 # 
 # Requires:

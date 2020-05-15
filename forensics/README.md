@@ -49,6 +49,4 @@ Script provides ability to upload IOCs for verification in Virustotal.
 ```
 
 ## Misc
-* TODO: Create custom log line parser 
-* TODO: HaveIbeenPwned API to confirm database breaches
-* TODO: Virustotal API script to get more info about hashes
+* TODO: Urlscan.io API to submit URLs for scanning to API: https://urlscan.io/

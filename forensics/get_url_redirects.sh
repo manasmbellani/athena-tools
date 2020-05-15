@@ -1,6 +1,6 @@
 #!/bin/bash
 # 
-# Script gets ALL redirects for a URL, domain OR IP using curl
+# Script gets ALL redirects for a URL, domain OR IP using curl and grep -E
 # 
 # Input:
 #     List of URLs to get redirects for
@@ -29,7 +29,7 @@ for url in $urls; do
         echo "[*] Get redirects for url: $url via method: $method"
         if [ "$method" == "curl" ]; then
             curl -A "$USER_AGENT" -s -i -v -L --http1.1 "$url" -o /dev/null 2>&1 \
-                | egrep -i "Location:"
+                | grep -Ei "Location:"
         else
             echo "[-] Unknown method: $method"
         fi
