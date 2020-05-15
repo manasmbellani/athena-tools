@@ -11,7 +11,11 @@
 # page is present.
 # 
 # Requires:
-#     JQ, to parse the output
+#     jq, to parse the output. This can be installed with in Mac, Linux via brew
+#         and apt-get respectively: 
+#              brew install jq
+#              
+#              sudo apt-get -y install jq
 # 
 # Input:
 #     List of IOCs one-per-line.
