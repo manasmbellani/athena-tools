@@ -49,9 +49,12 @@ def main():
 
         print("[*] Reading URLs from file: {urls}".format(**args))
         with open(args['urls'], 'r+') as f:
-            for line in f.readlines():
-                url = line.strip()
-                urls_to_screenshot.append(url)
+            
+                # Add url, if not blank
+                for line in f.readlines():
+                    url = line.strip()
+                    if url:
+                        urls_to_screenshot.append(url)
 
     else:
 
@@ -86,6 +89,7 @@ def main():
         except Exception as e:
             print("[-] Error when taking screenshot for URL: {}".format(url))
             print("[-] Error: {}, {}".format(e.__class__, str(e)))
+        print("=" * 60); print("\n\n")
 
 if __name__ == "__main__":
     sys.exit(main())
