@@ -19,9 +19,13 @@
 #     Breach Details for each breach in JSON format
 # 
 # Examples:
+# 
+#     Save the HIBP Key as environment variable
+#         HIBP_KEY="c.....c"
+# 
 #     To get the breaches for each breach in file in-breach-names.txt:
 #         ./list_breach_details_via_have_i_been_pwned.sh \
-#             c....c in-breach-names.txt
+#             $HIBP_KEY in-breach-names.txt
 
 if [ $# -lt 2 ]; then
     error "$0 <api-key> <breach-names/file> 

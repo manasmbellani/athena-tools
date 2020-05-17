@@ -20,17 +20,21 @@
 #     run: If 'run' not specified, print usage only and don't run script.
 #     username: Username to use for making phishtank check. Reported to Phishtank
 #         when making API calls to prevent rate limits. By default, 'anonymous'. 
-#     api_key: APP Key from setting up an app. By default, none provided, which 
-#         may have slightly higher rate limiting.
+#     api_key: Optional App Key from setting up an app. By default, none 
+#     provided, which may have slightly higher rate limiting.
 #     timeout: Timeout to use in seconds between making multiple requests. By 
 #         default, 5 seconds to prevent lockout.
 # 
 # Examples:
-#     To check the status of url https://www.travel.com, http://www.travel.com":
-#        echo -e "https://www.travel.com\nhttp://www.travel.com" \
-#            | ./get_phishtank_url_status.sh run
+#     To check the phishtank status of urls https://www.travel.com, \
+#     http://www.travel.com":
+#         echo -e "https://www.travel.com\nhttp://www.travel.com" \
+#             | ./get_phishtank_url_status.sh run
+# 
+#     To check the status of all URLs in the urls.txt: 
+#         cat urls.txt | ./get_phishtank_url_status.sh run
 #
-#
+
 if [ $# -lt 1 ]; then
     echo "[-] ...<urls>... | $0 run [username='anonymous'] [api_key=''] \
 [timeout=5]"

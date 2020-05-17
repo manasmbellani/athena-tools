@@ -21,9 +21,13 @@
 #     Breaches for each account in JSON format
 # 
 # Examples:
+#     Save the HIBP Key as environment variable
+#         HIBP_KEY="c.....c"
+# 
 #     To get the breaches for each username in file in-accounts.txt:
+#
 #         ./list_account_breaches_via_have_i_been_pwned.sh \
-#             c....c in-accounts.txt
+#             $HIBP_KEY in-accounts.txt
 # 
 
 if [ $# -lt 2 ]; then
@@ -56,9 +60,18 @@ for account in $accounts_to_check; do
     echo "[*] Sleeping for $sleeptime seconds..."
     sleep $sleeptime
 
+    # Add line separator
+    echo "[*] -----------------------------------------------------------------"
+    echo; echo
+
     echo "[*] Getting the pasties details where account: $account details were leaked within a paste..." | tee -a "$outfile"
     curl -s "https://haveibeenpwned.com/api/v3/pasteaccount/$account" -H "hibp-api-key: $api_key" | jq -r "." | tee -a "$outfile"
 
     echo "[*] Sleeping for $sleeptime seconds..."
     sleep $sleeptime
+
+    # Add line separator
+    echo "[*] -----------------------------------------------------------------"
+    echo; echo
+
 done

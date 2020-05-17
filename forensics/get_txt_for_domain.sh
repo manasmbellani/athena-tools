@@ -13,6 +13,10 @@
 #     method: Method to use perform DNS resolution. Currently both host, dig 
 #     are supported. By default, dig is used 
 # 
+# Example:
+#     To get the TXT record for domains in file domains.txt
+#         cat domains.txt | ./get_txt_for_domain run
+# 
 
 if [ $# -lt 1 ]; then
     echo "...<domains>... | $0 run [method=dig|host]" 
@@ -34,6 +38,9 @@ for domain in $domains; do
         else
             echo "[-] No method: $method found."
         fi
+
+        echo "[*] ------------------------------------------------------------"
+        echo; echo
     fi
 done
 

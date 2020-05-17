@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # 
 # Script will get a JPG screenshot for Web IP, domain, URL using wkhtmltoimage &
-# wkhtml utility within python. 
+# its corresponding library imgkit within python. 
 #
 # Note that imgkit only gets screenshots for URLs/domains that have valid 2xx,
 # 3xx responses. Otherwise, it will throw an error.
@@ -9,19 +9,29 @@
 # More info available here: https://github.com/jarrekk/imgkit
 # 
 # Requires:
-#     wkhtml installed via pip with command:
+#     wkhtml installed via pip with command in either Mac or Linux:
 #         python3 -m pip install wkhtml
 # 
-#     wkhtmltoimage, installed via brew in Mac or apt-get in linux:
+#     wkhtmltoimage, installed via brew in Mac or apt-get in Linux:
 #         sudo apt-get -y install wkhtmltoimage
 #         brew install wkhtmltoimage
-# 
 # Args:
 #     urls: List of URLs comma-separated OR file with list of URLs to scan.
 #         Required.
-#     out: Output file name to use for screenshots. If not provided, by default,
-#         name is prepared from filename.
-# 
+#     outfile_prefix : Output file name prefix  to use for screenshots suffixed 
+#         with index and jpg. If not provided, by default, output name is 
+#         obtained from the file itself.
+#  
+# Examples:
+#     To get screenshot of https://www.google.com which will be written to 
+#         outfile 'out-https---www.google.com.jpg':
+#         
+#         ./get_screenshot.py -u https://www.google.com
+#          
+#     To get the screenshots of urls from file urls.txt which will be written 
+#         to current directory:
+#         
+#         ./get_screenshot.py -u urls.txt
 
 # Image type screenshot to get via imgkit
 IMG_EXTENSION = ".jpg"
@@ -39,7 +49,8 @@ def main():
         Script takes a JPG screenshot of one or more URLs provided
     """)
     parser.add_argument("-u", "--urls", required=True,
-                        help="List of URLs to get screenshot")
+        help=("List of URLs to get screenshot of. Can be a "
+              "comma-delimited list OR a file with URL, one-per-line"))
     parser.add_argument("-o", "--out-prefix", help="Output file/folder prefix")
     args = vars(parser.parse_args())
 
@@ -85,11 +96,15 @@ def main():
             outfile))
         try:
             imgkit.from_url(url, outfile)
-            print("[+] Screenshot for URL: {} was successful".format(url))
+            print("[+] Screenshot for URL: {} written to outfile: {}".format(url,
+                outfile))
+                
         except Exception as e:
             print("[-] Error when taking screenshot for URL: {}".format(url))
             print("[-] Error: {}, {}".format(e.__class__, str(e)))
-        print("=" * 60); print("\n\n")
+
+        # Add a separator for better visibility
+        print("[*] " + "-" * 60); print("\n")
 
 if __name__ == "__main__":
     sys.exit(main())
