@@ -43,6 +43,7 @@ import argparse
 import imgkit
 import os
 import sys
+import datetime
 
 def main():
     parser = argparse.ArgumentParser(description="""
@@ -54,6 +55,10 @@ def main():
     parser.add_argument("-o", "--out-prefix", help="Output file/folder prefix")
     args = vars(parser.parse_args())
 
+    print("[*] Printing current time")
+    current_time = datetime.datetime.today().ctime()
+    print("[+] Current time: " + current_time)
+    
     print("[*] Checking if individual URLs or file of URLs provided")
     urls_to_screenshot = []
     if os.path.isfile(args['urls']):
@@ -98,7 +103,7 @@ def main():
             imgkit.from_url(url, outfile)
             print("[+] Screenshot for URL: {} written to outfile: {}".format(url,
                 outfile))
-                
+
         except Exception as e:
             print("[-] Error when taking screenshot for URL: {}".format(url))
             print("[-] Error: {}, {}".format(e.__class__, str(e)))

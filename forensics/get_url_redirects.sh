@@ -24,6 +24,10 @@ if [ $# -lt 1 ]; then
 fi
 method=${2:-"curl"}
 
+# Print the current time
+current_time=$(date)
+echo "[+] Current time: $current_time"
+
 # Loop through each URL
 urls=$(cat -)
 for url in $urls; do
