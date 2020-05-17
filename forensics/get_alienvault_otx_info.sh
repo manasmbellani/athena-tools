@@ -11,16 +11,18 @@
 # page is present.
 # 
 # Requires:
+# 
 #     jq, to parse the output. This can be installed with in Mac, Linux via brew
 #         and apt-get respectively: 
 #              brew install jq
-#              
 #              sudo apt-get -y install jq
 # 
 # Input:
 #     List of IOCs one-per-line.
 # 
 # Args:
+#     run: Specify 'run' to ensure that script runs. Otherwise, only the usage
+#         is printed.
 #     sections_to_get: Section of info to get via the API. 'all' will attempt to 
 #         get ALL info, whereas a specific name e.g general, reputation will
 #         attempt to get some info
@@ -28,14 +30,12 @@
 #         3s.
 # 
 # Example:
-#     To get ALL info about IP: 8.8.8.8, run the command:
-#         echo "8.8.8.8" | ./get_alientvault_info.sh 'all'
+#     To get ALL info about IP: 8.8.8.8, 1.1.1.1, run the command:
+#         echo -e "8.8.8.8\n1.1.1.1" | ./get_alienvault_otx_info.sh run 'all'
 # 
-#     To get ALL info about IP: 8.8.8.8, run the command:
-#         echo "8.8.8.8" | ./get_alientvault_info.sh 'all'
+#     To get ALL info about IPs in file iocs.txt, run the command:
+#         cat iocs.txt | ./get_alienvault_otx_info.sh run 'all'
 # 
-
-
 
 # User agent string to use for ALL operations
 USER_AGENT="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36"
@@ -61,9 +61,14 @@ DOMAIN_SECTIONS="general,geo,malware,url_list,whois,passive_dns"
 # Valid sections for URLs
 URL_SECTIONS="general,url_list"
 
+# Display the usage
+if [ $# -lt 1 ]; then
+    echo "[-] ...<iocs>... | $0 run [sections_to_get=all] [sleep_timeout=3]"
+    exit 1
+fi
 # Determine the info to get about the IOC from user
-sections_to_get=${1:-"all"}
-sleep_timeout=${2:-"3"}
+sections_to_get=${2:-"all"}
+sleep_timeout=${3:-"3"}
 
 function get_format {
     # Function returns the format of the IOC provided. Currently, the function
@@ -253,5 +258,9 @@ ioc: $ioc, format: $ioc_format"
         else
             echo "[-] Error getting IOC: $ioc format: $ioc_format"
         fi
+
+        # Print the separator for better visibility of output
+        echo "[*] ------------------------------------------------------------"
+        echo; echo
     fi
 done
