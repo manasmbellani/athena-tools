@@ -1,9 +1,10 @@
 #!/bin/bash
 # 
-# Script gets ALL redirects for a URL, domain OR IP using curl and grep -E
+# Script gets the response headers when accessing a given URL, domain OR IP
+# using curl and grep -E
 # 
 # Input:
-#     List of URLs to get redirects for
+#     List of URLs to get response headers for for
 # 
 # Args:
 #     run: Type 'run' to just run the script, otherwise the usage is displayed
@@ -11,8 +12,8 @@
 #     timeout: Timeout to apply when accessing URL. By default, 5 seconds.
 #     
 # Example:
-#     To get the URL redirects URLs in file urls.txt:
-#         cat urls.txt | ./get_url_redirects.sh run
+#     To get the URL response headers for URLs listed in file, urls.txt:
+#         cat urls.txt | ./get_url_resp_headers.sh run
 # 
 # 
 
@@ -33,7 +34,6 @@ urls=$(cat -)
 # device
 current_time=$(date)
 hostname=$(hostname)
-
 echo "[+] Current time: $current_time, hostname: $hostname"
 
 for url in $urls; do
@@ -41,12 +41,21 @@ for url in $urls; do
     # Ignore blank lines 
     if [ ! -z "$url" ]; then
 
-        echo "[*] Get redirects for url: $url via method: $method"
+        echo "[*] Get headers for url: $url via method: $method"
         if [ "$method" == "curl" ]; then
-            curl -A "$USER_AGENT" --max-time "$timeout" -s -i -v -L --http1.1 \
-"$url" -o /dev/null 2>&1 | grep -Ei "Location:"
+
+            # Prepare tmp file to store headers
+            tmpfile="$(mktemp -u)"
+            
+            # Get headers only
+            curl -D "$tmpfile" -A "$USER_AGENT" --max-time "$timeout" -s -i -L \
+            --http1.1 "$url" -o /dev/null
+            cat "$tmpfile"
+            
+            # Remove the temporary file
+            rm "$tmpfile" 2>/dev/null
         else
-            echo "[-] Unknown method: $method"
+            echo "[-] Unknown method: $method. Cannot get headers"
         fi
         echo "[*] -------------------------------------------------------------"
         echo; echo
