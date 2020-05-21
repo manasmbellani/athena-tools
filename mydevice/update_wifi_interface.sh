@@ -1,10 +1,13 @@
 #!/bin/bash
 # 
 # Script can be used to modify Wifi status (turn it on/off) from command line
-# Currently support on Mac OS X only
+# Currently support on Mac OS X only.
+# 
+# Taken from:
+#     https://osxdaily.com/2011/05/31/enable-disable-airport-wireless-connections-command-line/
 # 
 if [ $# -lt 1 ]; then
-    echo "[-] $0 <status=enable|disable> [interface=en0]"
+    echo "[-] $0 <status=enable|disable> [wifi-interface=en0]"
     exit 1
 fi
 status=${1:-"enable"}
