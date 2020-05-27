@@ -166,5 +166,5 @@ RUN git clone https://github.com/RhinoSecurityLabs/GCP-IAM-Privilege-Escalation 
 # -----------------------------------------------------------------------------
 # Start within this shared directory
 # -----------------------------------------------------------------------------
-WORKDIR /opt/athena-aws-pentesting
+WORKDIR /opt/athena-tools
 

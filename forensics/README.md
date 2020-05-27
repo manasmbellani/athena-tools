@@ -5,4 +5,7 @@ regular basis. The scripts themselves have documentation on how to use them.
 *All scripts provided here are based on publicly available tools and services*
 
 ## Misc
-* TODO: Urlscan.io API to submit URLs for scanning to API: https://urlscan.io/
+This section contains other tools/techniques and scripts to investigate IOCs/URLs
+
+### Analysing URLs 
+* Use `urlscanio` command available via pip and explained @ https://github.com/Aquarthur/urlscanio to submit URLs for scanning and taking screenshots via the API: https://urlscan.io/

@@ -7,3 +7,5 @@
 **/*.yml
 **/*.json
 **/.DS_Store
+**/screenshots*
+**/doms*
