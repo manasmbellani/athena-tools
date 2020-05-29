@@ -24,10 +24,12 @@
 # 
 # 
 if [ $# -lt 1 ]; then
-    echo "[-] ...<ips>... | $0 run <method=ipinfo|whois>"
+    echo "[-] ...<ips>... | $0 run <method=ipinfo|whois|scamalytics>"
     exit 1
 fi
 method=${2:-"ipinfo"}
+
+script_dir=$(dirname $0)
 
 ip_addrs=$(cat -)
 IFS=$'\n'
@@ -39,7 +41,12 @@ for ip in $ip_addrs; do
         elif [ "$method" == "whois" ]; then
             echo "[*] Getting info on IP: $ip via whois"
             whois "$ip"
-            
+        elif [ "$method" == "scamalytics" ]; then
+            echo "[*] Reviewing Scamalytics reputation for IP: $ip"
+            url="https://scamalytics.com/ip/$ip"
+            echo "$url" | $script_dir/../mydevice/invoke_url_in_browser.sh run
+        else
+            echo "[-] Unknown method: $method"
         fi
         # Print line separator
         echo
