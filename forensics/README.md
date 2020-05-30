@@ -7,6 +7,9 @@ regular basis. The scripts themselves have documentation on how to use them.
 ## Misc
 This section contains other tools/techniques and scripts to investigate IOCs/URLs
 
+### Analysing IPs
+
+
 ### Analysing URLs 
 * List of all Autonomous Systems Numbers (ASNs): https://bgp.potaroo.net/cidr/autnums.html
 * Verify ISP reputation via Scamalytics: https://scamalytics.com/ip/isp
