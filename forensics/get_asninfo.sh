@@ -27,7 +27,8 @@ for asn in $asns; do
             ip_in_asn=$(grep -oiE "[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+" "$outfile" | head -n1)
 
             if [ ! -z "$ip_in_asn" ]; then
-                echo "[*] Opening scamalytics to get info on IP: $ip_in_asn"
+                echo "[*] Opening scamalytics to get info on asn: $asn via \
+IP: $ip_in_asn"
                 echo "$ip_in_asn" | $script_dir/get_ipinfo.sh run "scamalytics"
 
                 # Delete the output file
