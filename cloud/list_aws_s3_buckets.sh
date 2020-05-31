@@ -24,4 +24,5 @@ via s3scan"
     python2 s3scan.py -p "$profile" -f text
 else
     echo "[-] Unknown method: $method"
+    exit 1
 fi
