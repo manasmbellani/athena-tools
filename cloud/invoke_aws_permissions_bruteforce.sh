@@ -41,11 +41,11 @@ elif [ "$method" == "weirdaal" ]; then
 
     echo "[*] Get the access key ID, access secret key for profile: $profile"
     access_key_id=$(cat ~/.aws/credentials | grep -A3 -i "$profile" \
-        | grep aws_access_key_id | head -n1 | cut -d ' ' -f3)
+        | grep aws_access_key_id | head -n1 | cut -d '=' -f2 | tr -d " ")
 
     echo "[*] Get the secret access key for the profile: $profile"
     secret_access_key=$(cat ~/.aws/credentials | grep -A3 -i "$profile" \
-        | grep aws_secret_access_key | head -n1 | cut -d ' ' -f3)
+        | grep aws_secret_access_key | head -n1 | cut -d '=' -f2 | tr -d " ")
 
     # Prepare the credentials template itself - with ONE key only containing 'default'
     cat<<EOF > .env
@@ -63,7 +63,7 @@ via weirdAAL"
 
     echo "[*] Get a list of all the available services via profile: $profile"
     source weirdAAL/bin/activate; python3 weirdAAL.py -m list_services_by_key \
-        -t $profile
+        -t "$profile"
 
     echo "[!] Based on the services available, consider running each command \
 for each module described here:
