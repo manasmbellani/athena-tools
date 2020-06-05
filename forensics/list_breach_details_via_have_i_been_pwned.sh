@@ -28,7 +28,7 @@
 #             $HIBP_KEY in-breach-names.txt
 
 if [ $# -lt 2 ]; then
-    error "$0 <api-key> <breach-names/file> 
+    echo "[-] $0 <api-key> <breach-names/file> 
                  [outfile=out-have-i-been-pwend-breach-details.txt]
                  [sleep_time_in_secs=4]"
     exit
@@ -39,28 +39,28 @@ outfile=${3:-"out-have-i-been-pwned-breach-details.txt"}
 sleep_time_in_secs=${4:-"4"}
 
 if [ -f "$breach_names_file" ]; then
-    verbose "Reading the breaches from file: $breach_names_file"
+    echo "[*] Reading the breaches from file: $breach_names_file"
     breaches_to_check=$(cat "$breach_names_file")
 else
-    verbose "Reading the breaches from user input: $breach_names_file"
+    echo "[*] Reading the breaches from user input: $breach_names_file"
     breaches_to_check=$(echo "$breach_names_file" | tr -s "," "\n")
 fi
 
-verbose "Checking if breach details outfile: $outfile exists"
+echo "[*] Checking if breach details outfile: $outfile exists"
 if [ -f "$outfile" ]; then
 
-    verbose "Deleting the breach details outfile: $outfile"
+    echo "[*] Deleting the breach details outfile: $outfile"
     rm "$outfile"
 fi
 
-verbose "Starting loop through all the breach names"
+echo "[*] Starting loop through all the breach names"
 IFS=$'\n'
 for breach_name in $breaches_to_check; do
 
-    verbose "Getting breach details for breach: $breach_name via HaveIBeenPwned API into outfile: $outfile..."
+    echo "[*] Getting breach details for breach: $breach_name via HaveIBeenPwned API into outfile: $outfile..."
     curl -s "https://haveibeenpwned.com/api/v3/breach/$breach_name" -H "hibp-api-key: $api_key" \
         | jq -r "." | tee -a "$outfile" 
 
-    verbose "Sleeping for time: $sleep_time_in_secs seconds"
+    echo "[*] Sleeping for time: $sleep_time_in_secs seconds"
     sleep "$sleep_time_in_secs"
 done

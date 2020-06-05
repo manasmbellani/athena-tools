@@ -30,8 +30,8 @@
 #             $HIBP_KEY in-accounts.txt
 # 
 
-if [ $# -lt 2 ]; then
-    echo "[-] $0 <api-key> <account-to-check/file-with-accounts> 
+if [ $# -lt 1 ]; then
+    echo "[-] ...<usernames>... | $0 <api-key>
                  [outfile=out-have-i-been-pwned-account-breaches.txt] 
                  [sleeptime=3]"
     exit
@@ -41,18 +41,13 @@ file_account_to_check="$2"
 outfile=${3:-"out-have-i-been-pwned-account-breaches.txt"}
 sleeptime=${4:-"3"}
 
-if [ -f "$file_account_to_check" ]; then
-    echo "[*] Reading accounts from file: $file_account_to_check..."
-    accounts_to_check=`cat "$file_account_to_check" | tr -s '\n' ','`
-else
-    echo "[*] Got single account: $accounts_to_check to run checks on..."
-    accounts_to_check="$file_account_to_check"
-fi
+# Get HIBP accounts to get information on  
+accounts_to_check=$(cat -)
 
 echo "[*] Removing any existing output files: $outfile..."
 rm "$outfile" 2>/dev/null
 
-IFS=','
+IFS=$'\n'
 for account in $accounts_to_check; do
     echo "[*] Getting the site breaches where account: $account details were leaked..." | tee -a "$outfile"
     curl -s "https://haveibeenpwned.com/api/v3/breachedaccount/$account?includeUnverified=true" -H "hibp-api-key: $api_key" | jq -r "." | tee -a "$outfile"

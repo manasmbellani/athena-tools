@@ -1,6 +1,7 @@
 #!/bin/bash
 # 
 # Script to replace the common functions with echo counterparts e.g. echo '[-]
+# for 'error' function
 # 
 if [ $# -lt 1 ]; then
     echo "[-] $0 <script_name>"
@@ -19,6 +20,10 @@ sed -i .bak "s/debug '/echo '[*] /g" "$script_name"
 echo "[*] Replacing 'info' function in script: $script_name"
 sed -i .bak 's/info "/echo "[+] /g' "$script_name"
 sed -i .bak "s/info '/echo '[+] /g" "$script_name"
+
+echo "[*] Replacing 'output' function in script: $script_name"
+sed -i .bak 's/output "/echo "[+] /g' "$script_name"
+sed -i .bak "s/output '/echo '[+] /g" "$script_name"
 
 echo "[*] Replacing 'error' function in script: $script_name"
 sed -i .bak 's/error "/echo "[-] /g' "$script_name"
