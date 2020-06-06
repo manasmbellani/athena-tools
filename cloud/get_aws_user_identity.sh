@@ -11,6 +11,7 @@
 #         - sts: Use 'sts get-caller-identity' method
 #         - iam: Use 'iam get-user' method
 #         - boto3_sts: Use 'boto3 sts' method
+#         - pacu
 #     By default, use 'sts' method to get the caller identity.
 # 
 # By default, awshoney_check used.
@@ -18,7 +19,7 @@
 #     region: Region to use for making this request. By default, 'ap-southeast-2'
 # 
 if [ $# -lt 1 ]; then
-    echo "[-] $0 run [method=sts|iam|boto3_sts] [profile=default] \
+    echo "[-] $0 run [method=sts|iam|boto3_sts|pacu] [profile=default] \
 [region=ap-southeast-2]"
     exit 1
 fi
@@ -44,5 +45,17 @@ mysession = boto3.session.Session(profile_name=\"$profile\", region_name=\"$regi
 print(boto3.client('sts').get_caller_identity())"
 else
     echo "[-] Unknown method: $method"
+elif [ "$method" == "pacu" ]; then
 
+    echo "[*] Credentials to add for Pacu..."
+    $script_dir/put_aws_pacu_creds.sh run "$profile" "$region"
+
+    echo "
+        ## Execute the aws username enumeration to get more info
+        run aws__enum_account
+    "
+    read "[!] Press any key to continue..."
+else
+    echo "[-] Unknown method: $method"
+    exit 1
 fi
