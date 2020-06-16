@@ -17,11 +17,11 @@ profile=${3:-"default"}
 region=${4:-"ap-southeast-2"}
 
 if [ "$method" == "awscli" ]; then
-    echo "[*] "
+    echo "[*] Get the list of all appstream stacks for profile: $profile, region: $region"
     aws appstream describe-stacks --profile=$profile --region=$region \
         | jq -r ".Stacks[]"
     
-    echo "[*] Get the list of "
+    echo "[*] Get the list of all appstream stacks for profile: $profile, region: $region"
     aws appstream describe-stacks --profile=$profile --region=$region \
         | jq -r ".Fleets[]"
 else
