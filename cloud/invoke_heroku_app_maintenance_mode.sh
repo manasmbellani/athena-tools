@@ -8,7 +8,7 @@ fi
 app_id="$1"
 mode="$2"
 
-if [ "$mode" == "on"] || [ "$mode" == "off" ]; then
+if [ "$mode" == "on" ] || [ "$mode" == "off" ]; then
     heroku maintenance:$mode --app "$app_id"
 else
     echo "[-] Unknown maintenance mode: $mode specified" 
