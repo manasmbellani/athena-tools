@@ -30,7 +30,7 @@ region=${4:-"ap-southeast-2"}
 if [ "$method" == "sts" ]; then
     echo "[*] Running 'sts' to get user identity via profile: $profile, region:\ 
 $region"
-    aws sts get-caller-identity --profile=$profile --region=$region
+
 
 elif [ "$method" == "iam" ]; then
     echo "[*] Running 'iam' to get user identity via profile: $profile, region:\
