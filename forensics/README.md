@@ -20,5 +20,4 @@ This section contains other tools/techniques and scripts to investigate IOCs/URL
 
 
 ### Analysing URLs 
-* Verify ISP reputation via Scamalytics: https://scamalytics.com/ip/isp
 * Use `urlscanio` command available via pip and explained @ https://github.com/Aquarthur/urlscanio to submit URLs for scanning and taking screenshots via the API: https://urlscan.io/
