@@ -44,7 +44,7 @@ if [ "$method" == "pacu" ]; then
     run iam__enum_permissions --all-users --all-roles 
 
     ## Attempt to get the permissions for a particular user only
-    run iam__enum_permissions --user-name $user_name
+    run iam__enum_permissions --user-name <user_name>
 
     ## Attempt to get enumeration for all the permissions that the user has on the loaded keys
     run iam__bruteforce_permissions
@@ -53,7 +53,7 @@ if [ "$method" == "pacu" ]; then
     run iam__bruteforce_permissions --all-users --all-roles 
 
     ## Attempt to get the permissions for a particular user only
-    run iam__bruteforce_permissions --user-name $user_name
+    run iam__bruteforce_permissions --user-name <user_name>
 
     ## Attempt to get the glue endpoints and press 'Y' to run across all regions
     run glue__enum
