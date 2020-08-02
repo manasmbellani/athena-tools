@@ -10,7 +10,7 @@ def exec_cmd(cmd):
 
 print("[*] Checking if running on supported Linux platform")
 os = sys.platform
-if os.lower() != "Linux": 
+if os.lower() != "linux": 
     print("[-] Not running on support platform. Current platform: {}".format(os))
     sys.exit(1)
 
