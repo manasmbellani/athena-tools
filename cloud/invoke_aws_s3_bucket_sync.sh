@@ -37,5 +37,5 @@ fi
 # Start syncing files between the destination bucket and folder
 echo "[*] Syncing files between source: $source_path & dest: $dest_bucket with \
 aws profile: $profile"
-/bin/bash -c "aws s3 sync $source_path $dest_bucket $size_only_arg \
+/bin/bash -c "aws s3 sync \"$source_path\" \"$dest_bucket\" $size_only_arg \
 --profile=$profile"
